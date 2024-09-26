@@ -1,6 +1,9 @@
 package PlayManager;
 
 import GamePanel.GamePanel;
+import Mino.Mino;
+import Mino.Block;
+import Mino.Mino_L1;
 
 import java.awt.*;
 
@@ -13,6 +16,10 @@ public class PlayManager {
     private int right_x;
     private int top_y;
     private int bottom_y;
+
+    Mino currmino;
+    final int mino_start_x;
+    final int mino_start_y;
 
     public int getWidth() {
         return width;
@@ -59,10 +66,17 @@ public class PlayManager {
         right_x = left_x + width;
         top_y = 50;
         bottom_y = top_y + height;
+
+        mino_start_x = left_x + width/2 - Block.getSize();
+        mino_start_y = top_y + Block.getSize();
+
+        currmino = new Mino_L1();
+        currmino.setXY(mino_start_x, mino_start_y);
+
     }
 
     public void update(){
-
+        currmino.update();
     }
 
     public void draw(Graphics2D g2){
@@ -76,6 +90,10 @@ public class PlayManager {
         g2.setFont(new Font("Arial", Font.PLAIN, 30));
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g2.drawString("Next", x + 60, y + 60); //orderlist (x,y)
+
+        if (currmino != null){
+            currmino.draw(g2);
+        }
 
     }
 
