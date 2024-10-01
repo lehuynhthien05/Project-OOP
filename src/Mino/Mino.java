@@ -22,6 +22,8 @@ public class Mino {
         this.tempB = tempB;
     }
 
+
+    //create a block with a color
     public void create(Color c){
         b[0] = new Block(c);
         b[1] = new Block(c);
@@ -39,6 +41,7 @@ public class Mino {
 
     }
 
+    //draw BLock method
     public void draw(Graphics2D g2) {
         g2.setColor(b[0].getColor());
         g2.fillRect(b[0].getX(), b[0].getY(), Block.getSize(), Block.getSize());

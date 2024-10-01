@@ -20,11 +20,13 @@ public class GamePanel extends JPanel implements Runnable{
         playerManager = new PlayManager();
     }
 
+    //start() method
     public void start(){
         gameThread = new Thread(this);
         gameThread.start();
     }
 
+    //run() method
     @Override
     public void run() {
         double drawInterval = 1000000000/ FPS;
@@ -46,10 +48,12 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
 
+    //update() method
     public void update(){
         playerManager.update();
     }
 
+    //paintComponent() method
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
