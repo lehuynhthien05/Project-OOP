@@ -3,6 +3,7 @@ package Mino;
 import java.awt.*;
 
 public class Mino_L1 extends Mino{
+    // Create a L1 shaped mino
     public Mino_L1(){
         create(Color.orange);
     }

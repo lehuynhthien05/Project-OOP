@@ -8,6 +8,7 @@ public class Block {
     private static final int SIZE = 30;
     private Color color;
 
+    //Constructor, getter and setter
     public Block(Color c) {
         color = c;
     }
@@ -44,6 +45,7 @@ public class Block {
         this.color = color;
     }
 
+    //draw() method
     public void draw(Graphics2D g2) {
         g2.setColor(getColor());
         g2.fillRect(getX(), getY(), SIZE, SIZE);

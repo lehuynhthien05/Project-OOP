@@ -61,6 +61,7 @@ public class PlayManager {
         this.bottom_y = bottom_y;
     }
 
+    //Constructor
     public PlayManager() {
         left_x = (GamePanel.width / 2) - (width/2);
         right_x = left_x + width;
@@ -75,10 +76,12 @@ public class PlayManager {
 
     }
 
+    //update() method
     public void update(){
         currmino.update();
     }
 
+    //draw() method
     public void draw(Graphics2D g2){
         g2.setColor(Color.WHITE);
         g2.setStroke(new BasicStroke(4f));
