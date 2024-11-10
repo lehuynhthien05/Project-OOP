@@ -2,12 +2,16 @@ package GamePanel;
 
 import javax.swing.*;
 import java.awt.*;
+
+import Handler.KeyHandler;
 import PlayManager.PlayManager;
 
 public class GamePanel extends JPanel implements Runnable{
     public static final int width = 1280;
     public static final int height = 720;
     final int FPS = 60;
+
+
     Thread gameThread;
     PlayManager playerManager;
 
@@ -16,6 +20,10 @@ public class GamePanel extends JPanel implements Runnable{
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK); //Optional
         this.setLayout(null);
+
+        //Implement KeyListener
+        this.addKeyListener(new KeyHandler());
+        this.setFocusable(true);
 
         playerManager = new PlayManager();
     }

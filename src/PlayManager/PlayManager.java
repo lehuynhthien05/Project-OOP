@@ -21,6 +21,32 @@ public class PlayManager {
     final int mino_start_x;
     final int mino_start_y;
 
+    static int dropInterval = 60; // 60 frames
+
+    public Mino getCurrmino() {
+        return currmino;
+    }
+
+    public void setCurrmino(Mino currmino) {
+        this.currmino = currmino;
+    }
+
+    public int getMino_start_x() {
+        return mino_start_x;
+    }
+
+    public int getMino_start_y() {
+        return mino_start_y;
+    }
+
+    public static int getDropInterval() {
+        return dropInterval;
+    }
+
+    public static void setDropInterval(int dropInterval) {
+        PlayManager.dropInterval = dropInterval;
+    }
+
     public int getWidth() {
         return width;
     }
