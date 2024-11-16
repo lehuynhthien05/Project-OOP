@@ -1,21 +1,30 @@
 package PlayManager;
 
 import GamePanel.GamePanel;
+import Handler.KeyHandler;
 import Mino.Mino;
 import Mino.Block;
 import Mino.Mino_L1;
+import Mino.Mino_Bar;
+import Mino.Mino_Square;
+import Mino.Mino_L2;
+import Mino.Mino_T;
+import Mino.Mino_Z1;
+import Mino.Mino_Z2;
+
+
 
 import java.awt.*;
 
-public class PlayManager {
+public class  PlayManager {
 
     final int width = 360;
     final int height = 600;
 
-    private int left_x;
-    private int right_x;
-    private int top_y;
-    private int bottom_y;
+    private static int left_x;
+    private static int right_x;
+    private static int top_y;
+    private static int bottom_y;
 
     Mino currmino;
     final int mino_start_x;
@@ -55,7 +64,7 @@ public class PlayManager {
         return height;
     }
 
-    public int getLeft_x() {
+    public static int getLeft_x() {
         return left_x;
     }
 
@@ -63,7 +72,7 @@ public class PlayManager {
         this.left_x = left_x;
     }
 
-    public int getRight_x() {
+    public static int getRight_x() {
         return right_x;
     }
 
@@ -79,7 +88,7 @@ public class PlayManager {
         this.top_y = top_y;
     }
 
-    public int getBottom_y() {
+    public static int getBottom_y() {
         return bottom_y;
     }
 
@@ -97,14 +106,40 @@ public class PlayManager {
         mino_start_x = left_x + width/2 - Block.getSize();
         mino_start_y = top_y + Block.getSize();
 
-        currmino = new Mino_L1();
+        currmino = pickMino() ;
         currmino.setXY(mino_start_x, mino_start_y);
 
     }
 
+    //pick Random Mino
+    private Mino pickMino(){
+        int random = (int)(Math.random() * 7);
+        switch (random){
+            case 0:
+                return new Mino_L1();
+            case 1:
+                return new Mino_Bar();
+            case 2:
+                return new Mino_Square();
+            case 3:
+                return new Mino_L2();
+            case 4:
+                return new Mino_T();
+            case 5:
+                return new Mino_Z1();
+            case 6:
+                return new Mino_Z2();
+        }
+        return null;
+    }
+
+
+
     //update() method
     public void update(){
-        currmino.update();
+        if (!KeyHandler.isPausePressed()) {
+            currmino.update();
+        }
     }
 
     //draw() method
@@ -124,6 +159,16 @@ public class PlayManager {
             currmino.draw(g2);
         }
 
+        //Draw pause
+        g2.setColor(Color.yellow);
+        g2.setFont(g2.getFont().deriveFont(50f));
+        if (KeyHandler.isPausePressed()) {
+            FontMetrics fm = g2.getFontMetrics();
+            String pauseText = "PAUSE";
+            int textWidth = fm.stringWidth(pauseText);
+            int textX = left_x + (width - textWidth) / 2;
+            g2.drawString(pauseText, textX, top_y + 300);
+        }
     }
 
 
