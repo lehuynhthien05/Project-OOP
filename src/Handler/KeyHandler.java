@@ -4,7 +4,15 @@ import java.awt.event.KeyListener;
 import java.awt.event.*;
 
 public class KeyHandler implements KeyListener {
-    private static boolean upPressed, downPressed, leftPressed, rightPressed;
+    private static boolean upPressed, downPressed, leftPressed, rightPressed, pausePressed;
+
+    public static boolean isPausePressed() {
+        return pausePressed;
+    }
+
+    public static void setPausePressed(boolean pausePressed) {
+        KeyHandler.pausePressed = pausePressed;
+    }
 
     public static boolean isUpPressed() {
         return upPressed;
@@ -52,6 +60,8 @@ public class KeyHandler implements KeyListener {
             leftPressed = true;
         } else if (code == KeyEvent.VK_RIGHT) {
             rightPressed = true;
+        } else if (code == KeyEvent.VK_SPACE) {
+            pausePressed = !pausePressed;
         }
     }
     public void keyTyped (KeyEvent e) {
