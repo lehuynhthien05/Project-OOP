@@ -47,7 +47,8 @@ public class Block {
 
     //draw() method
     public void draw(Graphics2D g2) {
+        int margin = 2;
         g2.setColor(getColor());
-        g2.fillRect(getX(), getY(), SIZE, SIZE);
+        g2.fillRect(getX() + margin, getY() + margin, SIZE - (margin * 2), SIZE - (margin * 2 ));
     }
 }

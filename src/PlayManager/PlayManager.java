@@ -15,6 +15,7 @@ import Mino.Mino_Z2;
 
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class  PlayManager {
 
@@ -29,6 +30,12 @@ public class  PlayManager {
     Mino currmino;
     final int mino_start_x;
     final int mino_start_y;
+
+    //nextMino
+    Mino nextMino;
+    final int nextMino_start_x;
+    final int nextMino_start_y;
+    public static ArrayList<Block> staticBlocks = new ArrayList<Block>();
 
     static int dropInterval = 60; // 60 frames
 
@@ -106,8 +113,13 @@ public class  PlayManager {
         mino_start_x = left_x + width/2 - Block.getSize();
         mino_start_y = top_y + Block.getSize();
 
+        nextMino_start_x = right_x + 175;
+        nextMino_start_y = top_y + 500;
+
         currmino = pickMino() ;
         currmino.setXY(mino_start_x, mino_start_y);
+        nextMino = pickMino();
+        nextMino.setXY(nextMino_start_x, nextMino_start_y);
 
     }
 
@@ -137,7 +149,18 @@ public class  PlayManager {
 
     //update() method
     public void update(){
-        if (!KeyHandler.isPausePressed()) {
+        if (currmino.active == false){
+            staticBlocks.add(currmino.b[0]);
+            staticBlocks.add(currmino.b[1]);
+            staticBlocks.add(currmino.b[2]);
+            staticBlocks.add(currmino.b[3]);
+
+            //Replace the current mino with the next mino
+            currmino = nextMino;
+            currmino.setXY(mino_start_x, mino_start_y);
+            nextMino = pickMino();
+            nextMino.setXY(nextMino_start_x, nextMino_start_y);
+        }else{
             currmino.update();
         }
     }
@@ -157,6 +180,14 @@ public class  PlayManager {
 
         if (currmino != null){
             currmino.draw(g2);
+        }
+
+        //Draw nextMino
+        nextMino.draw(g2);
+
+        //Draw staticBlocks
+        for (Block b : staticBlocks){
+            b.draw(g2);
         }
 
         //Draw pause
