@@ -26,7 +26,7 @@ public class KeyHandler implements KeyListener {
         return downPressed;
     }
 
-    public void setDownPressed(boolean downPressed) {
+    public static void setDownPressed(boolean downPressed) {
         KeyHandler.downPressed = downPressed;
     }
 
@@ -52,17 +52,24 @@ public class KeyHandler implements KeyListener {
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
 
-        if (code == KeyEvent.VK_UP) {
-            upPressed = true;
-        } else if (code == KeyEvent.VK_DOWN) {
-            downPressed = true;
-        } else if (code == KeyEvent.VK_LEFT) {
-            leftPressed = true;
-        } else if (code == KeyEvent.VK_RIGHT) {
-            rightPressed = true;
-        } else if (code == KeyEvent.VK_SPACE) {
-            pausePressed = !pausePressed;
+        switch (code) {
+            case KeyEvent.VK_UP:
+                upPressed = true;
+                break;
+            case KeyEvent.VK_DOWN:
+                downPressed = true;
+                break;
+            case KeyEvent.VK_LEFT:
+                leftPressed = true;
+                break;
+            case KeyEvent.VK_RIGHT:
+                rightPressed = true;
+                break;
+            case KeyEvent.VK_SPACE:
+                pausePressed = !pausePressed;
+                break;
         }
+
     }
     public void keyTyped (KeyEvent e) {
     }
