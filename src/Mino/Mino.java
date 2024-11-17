@@ -69,6 +69,8 @@ public class Mino {
         rightCollision = false;
         bottomCollision = false;
 
+        checkStaticBlockCollision();
+
         // Left wall
         for (int i = 0; i < b.length; i++) {
             if (b[i].getX() <= PlayManager.getLeft_x()) {
@@ -92,19 +94,54 @@ public class Mino {
     }
 
     private boolean checkRotationCollision() {
+        leftCollision = false;
+        rightCollision = false;
+        bottomCollision = false;
+
+        checkStaticBlockCollision();
         for (Block block : tempB) {
             if (block.getX() < PlayManager.getLeft_x() ||
                     block.getX() + Block.getSize() > PlayManager.getRight_x() ||
                     block.getY() + Block.getSize() > PlayManager.getBottom_y()) {
                 return true;
             }
+            // Check for collision with static blocks
+            for (Block staticBlock : PlayManager.staticBlocks) {
+                if (block.getX() == staticBlock.getX() && block.getY() == staticBlock.getY()) {
+                    return true;
+                }
+            }
         }
         return false;
     }
 
-    public void update(){
-        if (KeyHandler.isUpPressed()){
-            switch (direction){
+    //check Blockstatic method
+    private void checkStaticBlockCollision() {
+        leftCollision = false;
+        rightCollision = false;
+        bottomCollision = false;
+
+        for (Block staticBlock : PlayManager.staticBlocks) {
+            for (Block block : b) {
+                // Check bottom collision
+                if (block.getY() + Block.getSize() == staticBlock.getY() && block.getX() == staticBlock.getX()) {
+                    bottomCollision = true;
+                }
+                // Check left collision
+                if (block.getX() - Block.getSize() == staticBlock.getX() && block.getY() == staticBlock.getY()) {
+                    leftCollision = true;
+                }
+                // Check right collision
+                if (block.getX() + Block.getSize() == staticBlock.getX() && block.getY() == staticBlock.getY()) {
+                    rightCollision = true;
+                }
+            }
+        }
+    }
+
+    public void update() {
+        if (KeyHandler.isUpPressed()) {
+            switch (direction) {
                 case 1:
                     getDirection2();
                     break;
@@ -122,49 +159,43 @@ public class Mino {
                 updateXY(direction);
             }
             KeyHandler.setUpPressed(false);
-
         }
 
+        checkStaticBlockCollision();
         checkMovementCollision();
 
-        if (KeyHandler.isDownPressed()){
-            if (bottomCollision == false){
-                b[0].setY(b[0].getY() + Block.getSize());
-                b[1].setY(b[1].getY() + Block.getSize());
-                b[2].setY(b[2].getY() + Block.getSize());
-                b[3].setY(b[3].getY() + Block.getSize());
-
-                //Move down, reset the autoDropCounter
+        if (KeyHandler.isDownPressed()) {
+            if (!bottomCollision) {
+                for (Block block : b) {
+                    block.setY(block.getY() + Block.getSize());
+                }
                 autoDropCounter = 0;
             }
-            KeyHandler.setLeftPressed(false);
-        } else if (KeyHandler.isLeftPressed()){
-            if (leftCollision == false){
-                b[0].setX(b[0].getX() - Block.getSize());
-                b[1].setX(b[1].getX() - Block.getSize());
-                b[2].setX(b[2].getX() - Block.getSize());
-                b[3].setX(b[3].getX() - Block.getSize());
+            KeyHandler.setDownPressed(false);
+        } else if (KeyHandler.isLeftPressed()) {
+            if (!leftCollision) {
+                for (Block block : b) {
+                    block.setX(block.getX() - Block.getSize());
+                }
             }
             KeyHandler.setLeftPressed(false);
-        } else if (KeyHandler.isRightPressed()){
-            if (rightCollision == false){
-                b[0].setX(b[0].getX() + Block.getSize());
-                b[1].setX(b[1].getX() + Block.getSize());
-                b[2].setX(b[2].getX() + Block.getSize());
-                b[3].setX(b[3].getX() + Block.getSize());
+        } else if (KeyHandler.isRightPressed()) {
+            if (!rightCollision) {
+                for (Block block : b) {
+                    block.setX(block.getX() + Block.getSize());
+                }
             }
             KeyHandler.setRightPressed(false);
         }
 
-        if (bottomCollision){
+        if (bottomCollision) {
             active = false;
-        }else{
+        } else {
             autoDropCounter++;
-            if (autoDropCounter == PlayManager.getDropInterval()){
-                b[0].setY(b[0].getY() + Block.getSize());
-                b[1].setY(b[1].getY() + Block.getSize());
-                b[2].setY(b[2].getY() + Block.getSize());
-                b[3].setY(b[3].getY() + Block.getSize());
+            if (autoDropCounter >= PlayManager.getDropInterval()) {
+                for (Block block : b) {
+                    block.setY(block.getY() + Block.getSize());
+                }
                 autoDropCounter = 0;
             }
         }
