@@ -160,8 +160,46 @@ public class  PlayManager {
             currmino.setXY(mino_start_x, mino_start_y);
             nextMino = pickMino();
             nextMino.setXY(nextMino_start_x, nextMino_start_y);
+
+            checkDelete();
         }else{
             currmino.update();
+        }
+    }
+
+    public void checkDelete() {
+        int x = left_x;
+        int y = top_y;
+        int blockCount = 0;
+
+        while (x < right_x && y < bottom_y){
+            for (int i = 0; i < staticBlocks.size(); i++) {
+                if (staticBlocks.get(i).getX() == x && staticBlocks.get(i).getY() == y) {
+                    blockCount++;
+                }
+            }
+
+            x += Block.getSize();
+
+            if (x == right_x) {
+                if (blockCount == 12) {
+                    for (int i = staticBlocks.size()-1; i > -1; i--) {
+                        if (staticBlocks.get(i).getY()==y){
+                            staticBlocks.remove(i);
+                        }
+                    }
+
+                    // move lines above the deleted line down
+                    for (int i = 0; i < staticBlocks.size(); i++) {
+                        if (staticBlocks.get(i).getY() < y) {
+                            staticBlocks.get(i).setY(staticBlocks.get(i).getY() + Block.getSize());
+                        }
+                    }
+                }
+                blockCount = 0;
+                x = left_x;
+                y += Block.getSize();
+            }
         }
     }
 
