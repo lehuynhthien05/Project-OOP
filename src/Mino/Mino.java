@@ -93,12 +93,7 @@ public class Mino {
         }
     }
 
-    private boolean checkRotationCollision() {
-        leftCollision = false;
-        rightCollision = false;
-        bottomCollision = false;
-
-        checkStaticBlockCollision();
+    public boolean checkRotationCollision() {
         for (Block block : tempB) {
             if (block.getX() < PlayManager.getLeft_x() ||
                     block.getX() + Block.getSize() > PlayManager.getRight_x() ||
@@ -141,6 +136,7 @@ public class Mino {
 
     public void update() {
         if (KeyHandler.isUpPressed()) {
+            boolean canRotate = true;
             switch (direction) {
                 case 1:
                     getDirection2();
@@ -155,6 +151,19 @@ public class Mino {
                     getDirection1();
                     break;
             }
+
+            // Check if rotation would cause out of bounds
+            for (Block block : tempB) {
+                if (block.getX() < PlayManager.getLeft_x() || block.getX() + Block.getSize() > PlayManager.getRight_x()) {
+                    canRotate = false;
+                    break;
+                }
+            }
+            if (canRotate && !checkRotationCollision()) {
+                updateXY(direction);
+            }
+
+
             if (!checkRotationCollision()) {
                 updateXY(direction);
             }
