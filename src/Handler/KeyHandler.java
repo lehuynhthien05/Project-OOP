@@ -46,10 +46,8 @@ public class KeyHandler implements KeyListener {
         KeyHandler.rightPressed = rightPressed;
     }
 
+    @Override
     public void keyPressed(KeyEvent e) {
-    }
-
-    public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
 
         switch (code) {
@@ -69,7 +67,26 @@ public class KeyHandler implements KeyListener {
                 pausePressed = !pausePressed;
                 break;
         }
+    }
 
+    @Override
+    public void keyReleased(KeyEvent e) {
+        int code = e.getKeyCode();
+
+        switch (code) {
+            case KeyEvent.VK_UP:
+                upPressed = false;
+                break;
+            case KeyEvent.VK_DOWN:
+                downPressed = false;
+                break;
+            case KeyEvent.VK_LEFT:
+                leftPressed = false;
+                break;
+            case KeyEvent.VK_RIGHT:
+                rightPressed = false;
+                break;
+        }
     }
     public void keyTyped (KeyEvent e) {
     }
