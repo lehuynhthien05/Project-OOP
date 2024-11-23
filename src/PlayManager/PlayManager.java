@@ -39,6 +39,11 @@ public class  PlayManager {
 
     static int dropInterval = 60; // 60 frames
 
+    // Score
+    int score;
+    int lines;
+    int level;
+
     public Mino getCurrmino() {
         return currmino;
     }
@@ -189,6 +194,22 @@ public class  PlayManager {
                         }
                     }
 
+                    lines++;
+                    score += 50;
+
+                    // Change drop speed based on level
+                    if (lines % 5 == 0 && dropInterval > 1) {
+
+                        level += 1;
+
+                        if (dropInterval % 5 == 0 && dropInterval > 10) {
+                            dropInterval -= 10;
+                        } else {
+                            dropInterval -= 1;
+                        }
+                        setDropInterval(dropInterval);
+                    }
+
                     // move lines above the deleted line down
                     for (int i = 0; i < staticBlocks.size(); i++) {
                         if (staticBlocks.get(i).getY() < y) {
@@ -201,21 +222,36 @@ public class  PlayManager {
                 y += Block.getSize();
             }
         }
+
+        // Automatic add score each mino placed
+        score += 10;
+
     }
 
     //draw() method
     public void draw(Graphics2D g2){
+
+        // Draw Play Area Frame
         g2.setColor(Color.WHITE);
         g2.setStroke(new BasicStroke(4f));
         g2.drawRect(left_x - 4, top_y - 4, width+8, height + 8); //orderlist (x,y,width,height)
 
+        // Draw Next Mino Frame
         int x = right_x + 100;
         int y = bottom_y - 200;
         g2.drawRect(x, y, 200, 200);
         g2.setFont(new Font("Arial", Font.PLAIN, 30));
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2.drawString("Next", x + 60, y + 60); //orderlist (x,y)
+        g2.drawString("Next", x + 60, y + 60);  // order list (x,y)
 
+        // Draw Score Frame
+        g2.setColor(Color.GREEN);
+        g2.drawRect(x, top_y, 300, 200);
+        g2.drawString("LEVEL: " + level, x + 50, top_y+50);
+        g2.drawString("SCORE: " + score, x + 50, top_y + 100);
+        g2.drawString("LINES: " + lines, x + 50, top_y + 150);
+
+        // Draw the current mino
         if (currmino != null){
             currmino.draw(g2);
         }
