@@ -4,46 +4,54 @@ import java.awt.event.KeyListener;
 import java.awt.event.*;
 
 public class KeyHandler implements KeyListener {
-    private static boolean upPressed, downPressed, leftPressed, rightPressed, pausePressed;
-
-    public static boolean isPausePressed() {
-        return pausePressed;
-    }
-
-    public static void setPausePressed(boolean pausePressed) {
-        KeyHandler.pausePressed = pausePressed;
-    }
-
-    public static boolean isUpPressed() {
-        return upPressed;
-    }
+    private static boolean upPressed, downPressed, leftPressed, rightPressed, pausePressed, spacePressed;
 
     public static void setUpPressed(boolean upPressed) {
         KeyHandler.upPressed = upPressed;
-    }
-
-    public static boolean isDownPressed() {
-        return downPressed;
     }
 
     public static void setDownPressed(boolean downPressed) {
         KeyHandler.downPressed = downPressed;
     }
 
-    public static boolean isLeftPressed() {
-        return leftPressed;
-    }
-
     public static void setLeftPressed(boolean leftPressed) {
         KeyHandler.leftPressed = leftPressed;
     }
 
-    public static boolean isRightPressed() {
-        return rightPressed;
-    }
-
     public static void setRightPressed(boolean rightPressed) {
         KeyHandler.rightPressed = rightPressed;
+    }
+
+    public static void setPausePressed(boolean pausePressed) {
+        KeyHandler.pausePressed = pausePressed;
+    }
+
+    public static void setSpacePressed(boolean spacePressed) {
+        KeyHandler.spacePressed = spacePressed;
+    }
+
+    public static boolean isPausePressed() {
+        return pausePressed;
+    }
+
+    public static boolean isSpacePressed() {
+        return spacePressed;
+    }
+
+    public static boolean isUpPressed() {
+        return upPressed;
+    }
+
+    public static boolean isDownPressed() {
+        return downPressed;
+    }
+
+    public static boolean isLeftPressed() {
+        return leftPressed;
+    }
+
+    public static boolean isRightPressed() {
+        return rightPressed;
     }
 
     @Override
@@ -63,8 +71,11 @@ public class KeyHandler implements KeyListener {
             case KeyEvent.VK_RIGHT:
                 rightPressed = true;
                 break;
-            case KeyEvent.VK_SPACE:
+            case KeyEvent.VK_P:
                 pausePressed = !pausePressed;
+                break;
+            case KeyEvent.VK_SPACE:
+                spacePressed = true;
                 break;
         }
     }
@@ -86,8 +97,12 @@ public class KeyHandler implements KeyListener {
             case KeyEvent.VK_RIGHT:
                 rightPressed = false;
                 break;
+            case KeyEvent.VK_SPACE:
+                spacePressed = false;
+                break;
         }
     }
-    public void keyTyped (KeyEvent e) {
+
+    public void keyTyped(KeyEvent e) {
     }
 }
