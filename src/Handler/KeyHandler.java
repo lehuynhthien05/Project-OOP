@@ -3,6 +3,8 @@ package Handler;
 import java.awt.event.KeyListener;
 import java.awt.event.*;
 
+import static GamePanel.GamePanel.music;
+
 public class KeyHandler implements KeyListener {
     private static boolean upPressed, downPressed, leftPressed, rightPressed, pausePressed, spacePressed;
 
@@ -73,6 +75,11 @@ public class KeyHandler implements KeyListener {
                 break;
             case KeyEvent.VK_P:
                 pausePressed = !pausePressed;
+                if (pausePressed) {
+                    music.stopMusic();
+                } else {
+                    music.playMusic("/music.wav");
+                }
                 break;
             case KeyEvent.VK_SPACE:
                 spacePressed = true;
