@@ -11,6 +11,8 @@ public class GamePanel extends JPanel implements Runnable{
     public static final int height = 720;
     final int FPS = 60;
 
+    // Music
+    public static Sound music = new Sound();
 
     Thread gameThread;
     PlayManager playerManager;
@@ -32,6 +34,8 @@ public class GamePanel extends JPanel implements Runnable{
     public void start(){
         gameThread = new Thread(this);
         gameThread.start();
+
+        music.playMusic("/music.wav");
     }
 
     //run() method
