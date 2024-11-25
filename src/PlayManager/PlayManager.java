@@ -15,6 +15,8 @@ import Mino.Mino_Z2;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static GamePanel.GamePanel.music;
+
 public class PlayManager {
 
     final int width = 360;
@@ -209,6 +211,9 @@ public class PlayManager {
                             staticBlocks.remove(i);
                         }
                     }
+
+                    // Music when a row is deleted
+                    music.playEffectSound("/clear.wav");
 
                     lines++;
                     score += 50;
