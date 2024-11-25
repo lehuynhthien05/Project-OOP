@@ -76,9 +76,9 @@ public class KeyHandler implements KeyListener {
             case KeyEvent.VK_P:
                 pausePressed = !pausePressed;
                 if (pausePressed) {
-                    music.stopMusic();
+                    music.stopBackgroundMusic();
                 } else {
-                    music.playMusic("/music.wav");
+                    music.playBackgroundMusic("/music.wav");
                 }
                 break;
             case KeyEvent.VK_SPACE:
