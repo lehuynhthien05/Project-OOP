@@ -62,15 +62,19 @@ public class KeyHandler implements KeyListener {
 
         switch (code) {
             case KeyEvent.VK_UP:
+            case KeyEvent.VK_W: // W key for "up"
                 upPressed = true;
                 break;
             case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S: // S key for "down"
                 downPressed = true;
                 break;
             case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A: // A key for "left"
                 leftPressed = true;
                 break;
             case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D: // D key for "right"
                 rightPressed = true;
                 break;
             case KeyEvent.VK_P:
@@ -93,15 +97,19 @@ public class KeyHandler implements KeyListener {
 
         switch (code) {
             case KeyEvent.VK_UP:
+            case KeyEvent.VK_W: // W key for "up"
                 upPressed = false;
                 break;
             case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S: // S key for "down"
                 downPressed = false;
                 break;
             case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A: // A key for "left"
                 leftPressed = false;
                 break;
             case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D: // D key for "right"
                 rightPressed = false;
                 break;
             case KeyEvent.VK_SPACE:
@@ -109,6 +117,7 @@ public class KeyHandler implements KeyListener {
                 break;
         }
     }
+
 
     public void keyTyped(KeyEvent e) {
     }
