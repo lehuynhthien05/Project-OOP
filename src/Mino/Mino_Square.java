@@ -18,55 +18,20 @@ public class Mino_Square extends Mino{
         b[3].setY(b[0].getY() + b[0].getSize());
     }
 
-    public void getDirection1(){
-        tempB[0].setX(b[0].getX());
-        tempB[0].setY(b[0].getY());
-        tempB[1].setX(b[0].getX() + b[0].getSize());
-        tempB[1].setY(b[0].getY());
-        tempB[2].setX(b[0].getX());
-        tempB[2].setY(b[0].getY() + b[0].getSize());
-        tempB[3].setX(b[0].getX() + b[0].getSize());
-        tempB[3].setY(b[0].getY() + b[0].getSize());
-
-        updateXY(1);
+    public void getDirection1() {
+        // Square doesn't rotate, just keep it fixed in its position
     }
 
-    public void getDirection2(){
-        tempB[0].setX(b[0].getX());
-        tempB[0].setY(b[0].getY());
-        tempB[1].setX(b[0].getX() + b[0].getSize());
-        tempB[1].setY(b[0].getY());
-        tempB[2].setX(b[0].getX());
-        tempB[2].setY(b[0].getY() + b[0].getSize());
-        tempB[3].setX(b[0].getX() + b[0].getSize());
-        tempB[3].setY(b[0].getY() + b[0].getSize());
-
-        updateXY(2);
+    public void getDirection2() {
+        getDirection1();
     }
 
-    public void getDirection3(){
-        tempB[0].setX(b[0].getX());
-        tempB[0].setY(b[0].getY());
-        tempB[1].setX(b[0].getX() + b[0].getSize());
-        tempB[1].setY(b[0].getY());
-        tempB[2].setX(b[0].getX());
-        tempB[2].setY(b[0].getY() + b[0].getSize());
-        tempB[3].setX(b[0].getX() + b[0].getSize());
-        tempB[3].setY(b[0].getY() + b[0].getSize());
-
-        updateXY(3);
+    public void getDirection3() {
+        getDirection1();
     }
 
-    public void getDirection4(){
-        tempB[0].setX(b[0].getX());
-        tempB[0].setY(b[0].getY());
-        tempB[1].setX(b[0].getX() + b[0].getSize());
-        tempB[1].setY(b[0].getY());
-        tempB[2].setX(b[0].getX());
-        tempB[2].setY(b[0].getY() + b[0].getSize());
-        tempB[3].setX(b[0].getX() + b[0].getSize());
-        tempB[3].setY(b[0].getY() + b[0].getSize());
-
-        updateXY(4);
+    public void getDirection4() {
+        getDirection1();
     }
+
 }
