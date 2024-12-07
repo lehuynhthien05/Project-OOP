@@ -154,6 +154,7 @@ public class PlayManager {
     // update() method
     public void update() {
         if (gameOver) {
+            music.stopBackgroundMusic();
             if (KeyHandler.isSpacePressed()) {
                 resetGame();
             }
@@ -257,6 +258,7 @@ public class PlayManager {
         currmino.setXY(mino_start_x, mino_start_y);
         nextMino = pickMino();
         nextMino.setXY(nextMino_start_x, nextMino_start_y);
+        music.playBackgroundMusic("/music.wav");
     }
 
     // draw() method
