@@ -1,24 +1,46 @@
 package Main;
 
-import GamePanel.GamePanel;
+import GamePanel.*;
 
 import javax.swing.*;
 
-import static java.awt.SystemColor.window;
-
 public class Main {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Tetris Game");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
+        // Tạo JFrame chính
+        JFrame window = new JFrame("Tetrix Game");
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setSize(800, 600);
+        window.setLocationRelativeTo(null);
+        window.setResizable(false);
 
+        // Tạo ScreenManager để quản lý các màn hình
+        ScreenManager screenManager = new ScreenManager();
+
+        // Tạo màn hình chờ
+        WaitingScreen waitingScreen = new WaitingScreen(
+            e -> {
+                // Chuyển sang màn hình game
+                screenManager.showScreen("GamePanel");
+            },
+            e -> {
+                // Thoát game
+                System.exit(0);
+            }
+        );
+
+        // Tạo màn hình chơi game
         GamePanel gamePanel = new GamePanel();
-        frame.add(gamePanel);
-        frame.pack();
+        gamePanel.start(); // Gọi phương thức start() để bắt đầu game
 
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        // Thêm các màn hình vào ScreenManager
+        screenManager.addScreen("WaitingScreen", waitingScreen);
+        screenManager.addScreen("GamePanel", gamePanel);
 
-        gamePanel.start();
+        // Hiển thị màn hình chờ khi khởi động
+        screenManager.showScreen("WaitingScreen");
+
+        // Thêm ScreenManager vào JFrame
+        window.add(screenManager);
+        window.setVisible(true); 
     }
 }
