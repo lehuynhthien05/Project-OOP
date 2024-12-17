@@ -1,4 +1,5 @@
 package Main;
+
 import javax.swing.*;
 import GamePanel.*;
 
@@ -12,12 +13,12 @@ public class Main {
 
         // Create the waiting screen
         WaitingScreen waitingScreen = new WaitingScreen(
-            e -> {
-                screenManager.showScreen("GamePanel");
-                gamePanel.start();
-                gamePanel.requestFocusInWindow(); // Ensure GamePanel receives keyboard focus
-            },
-            e -> System.exit(0) // Exit the game
+                e -> {
+                    screenManager.showScreen("GamePanel");
+                    gamePanel.start();
+                    gamePanel.requestFocusInWindow(); // Ensure GamePanel receives keyboard focus
+                },
+                e -> System.exit(0) // Exit the game
         );
 
         // Add screens to the ScreenManager
