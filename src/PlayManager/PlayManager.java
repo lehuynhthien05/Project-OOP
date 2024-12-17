@@ -85,7 +85,7 @@ public class PlayManager {
     public void setLeft_x(int left_x) {
         this.left_x = left_x;
     }
-
+ 
     public static int getRight_x() {
         return right_x;
     }
