@@ -7,30 +7,30 @@ public class Main {
         JFrame frame = new JFrame("Tetrix Game");
         ScreenManager screenManager = new ScreenManager();
 
-        // Tạo màn hình chơi
+        // Create the game panel
         GamePanel gamePanel = new GamePanel();
 
-        // Tạo màn hình chờ
+        // Create the waiting screen
         WaitingScreen waitingScreen = new WaitingScreen(
             e -> {
                 screenManager.showScreen("GamePanel");
                 gamePanel.start();
-                gamePanel.requestFocusInWindow(); // Đảm bảo GamePanel nhận bàn phím
+                gamePanel.requestFocusInWindow(); // Ensure GamePanel receives keyboard focus
             },
-            e -> System.exit(0)
+            e -> System.exit(0) // Exit the game
         );
 
-        // Thêm các màn hình vào ScreenManager
+        // Add screens to the ScreenManager
         screenManager.addScreen("WaitingScreen", waitingScreen);
         screenManager.addScreen("GamePanel", gamePanel);
 
-        // Cài đặt JFrame
+        // Setup JFrame
         frame.add(screenManager);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(GamePanel.width, GamePanel.height);
         frame.setVisible(true);
 
-        // Hiển thị màn hình chờ
+        // Display the waiting screen
         screenManager.showScreen("WaitingScreen");
     }
 }
