@@ -1,46 +1,36 @@
 package Main;
-
-import GamePanel.*;
-
 import javax.swing.*;
+import GamePanel.*;
 
 public class Main {
     public static void main(String[] args) {
-        // Tạo JFrame chính
-        JFrame window = new JFrame("Tetrix Game");
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setSize(800, 600);
-        window.setLocationRelativeTo(null);
-        window.setResizable(false);
-
-        // Tạo ScreenManager để quản lý các màn hình
+        JFrame frame = new JFrame("Tetrix Game");
         ScreenManager screenManager = new ScreenManager();
+
+        // Tạo màn hình chơi
+        GamePanel gamePanel = new GamePanel();
 
         // Tạo màn hình chờ
         WaitingScreen waitingScreen = new WaitingScreen(
             e -> {
-                // Chuyển sang màn hình game
                 screenManager.showScreen("GamePanel");
+                gamePanel.start();
+                gamePanel.requestFocusInWindow(); // Đảm bảo GamePanel nhận bàn phím
             },
-            e -> {
-                // Thoát game
-                System.exit(0);
-            }
+            e -> System.exit(0)
         );
-
-        // Tạo màn hình chơi game
-        GamePanel gamePanel = new GamePanel();
-        gamePanel.start(); // Gọi phương thức start() để bắt đầu game
 
         // Thêm các màn hình vào ScreenManager
         screenManager.addScreen("WaitingScreen", waitingScreen);
         screenManager.addScreen("GamePanel", gamePanel);
 
-        // Hiển thị màn hình chờ khi khởi động
-        screenManager.showScreen("WaitingScreen");
+        // Cài đặt JFrame
+        frame.add(screenManager);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(GamePanel.width, GamePanel.height);
+        frame.setVisible(true);
 
-        // Thêm ScreenManager vào JFrame
-        window.add(screenManager);
-        window.setVisible(true); 
+        // Hiển thị màn hình chờ
+        screenManager.showScreen("WaitingScreen");
     }
 }
