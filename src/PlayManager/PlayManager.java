@@ -264,11 +264,26 @@ public class PlayManager {
     // draw() method
     public void draw(Graphics2D g2) {
         // Draw Play Area Frame
-        g2.setColor(Color.WHITE);
+        g2.setColor(new Color(0xFFFFFF));
         g2.setStroke(new BasicStroke(4f));
         g2.drawRect(left_x - 4, top_y - 4, width + 8, height + 8); // orderlist (x,y,width,height)
 
+        // Draw grid for the Play Area
+        g2.setColor(new Color(255, 255, 255, 80));
+        g2.setStroke(new BasicStroke(4f));
+
+        // Draw vertical grid lines
+        for (int x = left_x; x <= right_x; x += Block.getSize()) {
+            g2.drawLine(x, top_y, x, bottom_y);
+        }
+
+        // Draw horizontal grid lines
+        for (int y = top_y; y <= bottom_y; y += Block.getSize()) {
+            g2.drawLine(left_x, y, right_x, y);
+        }
+
         // Draw Next Mino Frame
+        g2.setColor(new Color(0xFFFFFF));
         int x = right_x + 100;
         int y = bottom_y - 200;
         g2.drawRect(x, y, 200, 200);
@@ -277,7 +292,7 @@ public class PlayManager {
         g2.drawString("Next", x + 60, y + 60); // order list (x,y)
 
         // Draw Score Frame
-        g2.setColor(Color.GREEN);
+        g2.setColor(new Color(0xFFFFFF));
         g2.drawRect(x, top_y, 300, 200);
         g2.drawString("LEVEL: " + level, x + 50, top_y + 50);
         g2.drawString("SCORE: " + score, x + 50, top_y + 100);
@@ -313,8 +328,7 @@ public class PlayManager {
             g2.setFont(g2.getFont().deriveFont(50f));
             FontMetrics fm = g2.getFontMetrics();
             String gameOverText = "GAME OVER";
-            int textWidth = fm.stringWidth(gameOverText);
-            int textX = left_x + (width - textWidth) / 2;
+            int textX = 50;
             g2.drawString(gameOverText, textX, top_y + 300);
         }
     }
