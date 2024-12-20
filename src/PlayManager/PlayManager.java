@@ -270,7 +270,7 @@ public class PlayManager {
 
         // Draw grid for the Play Area
         g2.setColor(new Color(255, 255, 255, 80));
-        g2.setStroke(new BasicStroke(4f));
+        g2.setStroke(new BasicStroke(2.5f));
 
         // Draw vertical grid lines
         for (int x = left_x; x <= right_x; x += Block.getSize()) {
@@ -289,14 +289,14 @@ public class PlayManager {
         g2.drawRect(x, y, 200, 200);
         g2.setFont(new Font("Arial", Font.PLAIN, 30));
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2.drawString("Next", x + 60, y + 60); // order list (x,y)
+        g2.drawString("Next", x + 70, y + 50); // order list (x,y)
 
         // Draw Score Frame
         g2.setColor(new Color(0xFFFFFF));
-        g2.drawRect(x, top_y, 300, 200);
-        g2.drawString("LEVEL: " + level, x + 50, top_y + 50);
-        g2.drawString("SCORE: " + score, x + 50, top_y + 100);
-        g2.drawString("LINES: " + lines, x + 50, top_y + 150);
+        g2.drawRect(70, y, 300, 200);
+        g2.drawString("LEVEL: " + level,  130, y + 60);
+        g2.drawString("SCORE: " + score,  130, y + 110);
+        g2.drawString("LINES: " + lines,  130, y + 160);
 
         // Draw the current mino
         if (currmino != null) {
