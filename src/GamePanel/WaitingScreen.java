@@ -13,7 +13,7 @@ public class WaitingScreen extends JPanel {
         setBackground(Color.DARK_GRAY); // Set background color to dark gray
 
         // Create and configure the title label
-        JLabel titleLabel = new JLabel("Welcome to Tetrix Game!");
+        JLabel titleLabel = new JLabel("Welcome to Tetris Game!");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 32)); // Set font size and style
         titleLabel.setForeground(Color.WHITE); // Set text color to white
 
