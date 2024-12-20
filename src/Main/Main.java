@@ -5,7 +5,7 @@ import GamePanel.*;
 
 public class Main {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Tetrix Game");
+        JFrame frame = new JFrame("Tetris Game");
         ScreenManager screenManager = new ScreenManager();
 
         // Create the game panel
