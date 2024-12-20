@@ -12,5 +12,6 @@ public class StartButton extends JButton {
         this.setBackground(Color.GREEN);
         this.setForeground(Color.BLACK);
         this.addActionListener(action);
+        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 }

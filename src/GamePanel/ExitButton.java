@@ -10,7 +10,8 @@ public class ExitButton extends JButton {
         this.setFont(new Font("Arial", Font.BOLD, 24));
         this.setFocusPainted(false);
         this.setBackground(Color.RED);
-        this.setForeground(Color.WHITE);
+        this.setForeground(Color.BLACK);
         this.addActionListener(action);
+        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 }
