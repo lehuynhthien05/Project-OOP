@@ -153,6 +153,7 @@ public class PlayManager {
 
     // update() method
     public void update() {
+        music.playBackgroundMusic("/music.wav");  // Ensure background music loops continuously
         if (gameOver) {
             music.stopBackgroundMusic();
             if (KeyHandler.isSpacePressed()) {
