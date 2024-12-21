@@ -5,7 +5,7 @@ import PlayManager.PlayManager;
 
 import java.awt.*;
 
-public class Mino {
+public abstract class Mino {
     public Block []b = new Block[4];
     public Block []tempB = new Block[4];
 
@@ -59,10 +59,10 @@ public class Mino {
         b[3].setX(tempB[3].getX());
         b[3].setY(tempB[3].getY());
     }
-    public void getDirection1(){}
-    public void getDirection2(){}
-    public void getDirection3(){}
-    public void getDirection4(){}
+    abstract void getDirection1();
+    abstract void getDirection2();
+    abstract void getDirection3();
+    abstract void getDirection4();
 
     public void checkMovementCollision() {
         leftCollision = false;
