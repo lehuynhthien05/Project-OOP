@@ -16,6 +16,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import static GamePanel.GamePanel.music;
+import static Handler.KeyHandler.isPausePressed;
 
 public class PlayManager {
 
@@ -153,13 +154,14 @@ public class PlayManager {
 
     // update() method
     public void update() {
-        music.playBackgroundMusic("/music.wav");  // Ensure background music loops continuously
-        if (gameOver) {
+        if (gameOver || isPausePressed()) {
             music.stopBackgroundMusic();
             if (KeyHandler.isSpacePressed()) {
                 resetGame();
             }
             return;
+        } else {
+            music.playBackgroundMusic("/music.wav");
         }
 
         if (KeyHandler.isPausePressed()) {
